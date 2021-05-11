@@ -4,7 +4,8 @@ const { Schema } =  mongoose;
 const orderSchema = new Schema({ 
         orderId: {
             type: Number,
-            required: true
+            required: true,
+            unique: true
         },
         orderDate: Date,
         orderStatus: {

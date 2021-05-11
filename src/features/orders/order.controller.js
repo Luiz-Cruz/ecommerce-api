@@ -18,10 +18,8 @@ async function list(req, res) {
 }
 
 async function listById(req, res) {
-    const id = req.params.id;
-    console.log(id);
-    const result = await orderService.list({});
-    res.send(result);
+   const result = await orderService.listById(req.params.id);
+   res.send(result);
 }
 
 module.exports = { create, list, listById };
