@@ -1,27 +1,36 @@
 const mongoose = require('mongoose');
 const { Schema } =  mongoose;
 
-const orderSchema = new Schema({
-    orders: {
-        order_id: String,
-        order_date: Date,
-        order_status: String,
-        client_name: String,
-        client_email: String,
-        order_value: String,
-        shipping_value: String,
-        client_cep: Number,
-        client_address: String,
-        payment: String,
-        Items: String,
-    },
-    items: {
-        item_id: String,
-        item_description: String,
-        item_value: String,
-        item_quantity: Number,
-        discount: String,
-    },
+const orderSchema = new Schema({ 
+        orderId: {
+            type: Number,
+            required: true
+        },
+        orderDate: Date,
+        orderStatus: {
+            type: String,
+            enum: ['OPEN', 'PAYED', 'FINISH'],
+            default: 'OPEN'
+        },
+        clientName: String,
+        clientEmail: String,
+        orderValue: Number,
+        shippingValue: Number,
+        address: {
+            cep: Number,
+            street: String,
+        },
+        paymentMethod: {
+            enum: ['CREDIT', 'DEBIT', 'CASH'],
+            type: String
+        },
+        items: [{
+            itemId: Number,
+            itemDescription: String,
+            itemValue: Number,
+            itemQuantity: Number,
+            discount: Number,
+        }], 
 });
 
-module.exports = mongoose.model('oders', orderSchema);
+module.exports = mongoose.model('orders', orderSchema);

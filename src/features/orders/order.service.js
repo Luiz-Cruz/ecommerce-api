@@ -1,16 +1,20 @@
-const orderModel = require('./order.model');
-
-async function create(req, res) {
-    try {
-        await orderModel.create(req.body);
-        res.status(201).json('Success!');
-    } catch(err) {
-        res.status(400).json('Error to saving in database');
-    }
-}
+const repository = require('./order.repository');
 
 async function list(params) {
-    return await orderModel.findOne(params).exec();
+  // Formatar para SQLServer -> select * from tabela where from = o1803852
+
+  const conditions = {};
+  const paging = {};
+
+  return await repository.find(conditions, paging); // recebe as conditions
 }
 
-module.exports = { create, list };
+async function insert(payload) {
+  return await repository.insert(payload);
+}
+
+async function update(payload) {
+  return await repository.update(payload);
+}
+
+module.exports = { list, insert, update };
