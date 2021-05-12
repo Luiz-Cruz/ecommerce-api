@@ -3,7 +3,7 @@ const repository = require('./order.repository');
 async function list(params) {
   // Formatar para SQLServer -> select * from tabela where from = o1803852
 
-  const conditions = {};
+  const conditions = params;
   const paging = {};
 
   return await repository.find(conditions, paging); // recebe as conditions
@@ -13,12 +13,20 @@ async function listById(id) {
    return await repository.find({'orderId': id });
 }
 
-async function insert(payload) {
-  return await repository.insert(payload);
+async function listItem(orderId, itemId) {
+  return await repository.findItem(orderId, itemId);
 }
 
-async function update(payload) {
-  return await repository.update(payload);
+async function insert(body) {
+  return await repository.insert(body);
 }
 
-module.exports = { list, listById, insert, update };
+async function update(id, body) {
+  return await repository.update(id, body);
+}
+
+async function remove(id) {
+  return await repository.remove({'orderId': id});
+}
+
+module.exports = { list, listById, listItem, insert, update, remove };
