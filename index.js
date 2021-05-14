@@ -10,12 +10,12 @@ app.use(express.json());
 app.use('/orders', orderRoutes);
 
 app.listen(port, async () => {
-    try {
-        await mongoose.connect(process.env.DB_URL, {
-            useNewUrlParser: true,
-        });
-        console.log(`Listenning at http://localhost:${port}`);
-    } catch(err) {
+  try {
+    await mongoose.connect(process.env.DB_URL, {
+      useNewUrlParser: true,
+    });
+    console.log(`Listenning at http://localhost:${port}`);
+  } catch (err) {
     console.error(err);
-    }
+  }
 });
