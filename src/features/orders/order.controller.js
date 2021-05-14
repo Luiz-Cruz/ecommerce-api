@@ -8,7 +8,7 @@ async function create(req, res) {
         const order = await orderService.insert(req.body);
         res.status(201).json(order);
     } catch(err) {
-        res.status(400).json('Error to saving in database');
+        res.status(400).json({'code': 400, 'message': 'Error to create order', 'details': err.stack});
     }
 }
 
@@ -41,11 +41,12 @@ async function listById(req, res) {
 
 async function listItem(req, res) {
     try {
-        const { items } = await orderService.listItem(req.params.id, req.params.itemid);
-        const foundItem = items.find(item => item.itemId == req.params.itemid);
+        const {id, itemId} = req.params;
+        const items = await orderService.listItem(id, itemId);
+        const foundItem = items.find(item => item.itemId == itemId);
         res.status(200).json(foundItem);
     } catch(err){
-        res.status(400).json('Error to list item');
+        res.status(400).json({'code': 400, 'message': 'Error to list items', 'details': err.stack});
     }   
 }
 
@@ -70,7 +71,7 @@ async function updateItem(req, res) {
 async function remove(req, res) {
     try{
         const order = await orderService.remove(req.params.id);
-        res.status(200).json(order);
+        res.status(204).json();
     } catch(err){
         res.status(400).json('Error to remove in database');
     }
