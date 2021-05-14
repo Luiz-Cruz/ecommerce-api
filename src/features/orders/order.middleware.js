@@ -1,6 +1,4 @@
-const statusCodes = {
-  BAD_REQUEST: 400,
-};
+const statusCodes = require('../../utils/statusCodes');
 
 const checkShippingValue = (req, res, next) => {
   const { shippingValue, orderValue } = req.body;
