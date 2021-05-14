@@ -2,11 +2,6 @@ const orderService = require('./order.service');
 
 async function create(req, res) {
   try {
-    if (req.body.shippingValue > req.body.orderValue) {
-      res
-        .status(400)
-        .json('Error shipping value is more bigger then order value');
-    }
     const order = await orderService.insert(req.body);
     res.status(201).json(order);
   } catch (err) {
