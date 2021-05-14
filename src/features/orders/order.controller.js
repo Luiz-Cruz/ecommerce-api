@@ -1,38 +1,41 @@
+const statusCodes = require('../../utils/statusCodes');
 const orderService = require('./order.service');
 
 async function create(req, res) {
   try {
     const order = await orderService.insert(req.body);
-    res.status(201).json(order);
+    res.status(statusCodes.CREATED).json(order);
   } catch (err) {
-    res.status(400).json('Error to saving in database');
+    res
+      .status(statusCodes.BAD_REQUEST)
+      .json({ message: 'Error to saving in database' });
   }
 }
 
 async function addItem(req, res) {
   try {
     const order = await orderService.addItem(req.params.id, req.body);
-    res.status(201).json(order);
+    res.status(statusCodes.CREATED).json(order);
   } catch (err) {
-    res.status(400).json('Error to add item');
+    res.status(statusCodes.BAD_REQUEST).json({ message: 'Error to add item' });
   }
 }
 
 async function list(req, res) {
   try {
     const order = await orderService.list(req.query);
-    res.status(200).json(order);
+    res.status(statusCodes.OK).json(order);
   } catch (err) {
-    res.status(400).json('Error to list item');
+    res.status(statusCodes.BAD_REQUEST).json({ message: 'Error to list item' });
   }
 }
 
 async function listById(req, res) {
   try {
     const order = await orderService.listById(req.params.id);
-    res.status(200).json(order);
+    res.status(statusCodes.OK).json(order);
   } catch (err) {
-    res.status(400).json('Error to list item');
+    res.status(statusCodes.BAD_REQUEST).json({ message: 'Error to list item' });
   }
 }
 
@@ -43,36 +46,42 @@ async function listItem(req, res) {
       req.params.itemid
     );
     const foundItem = items.find((item) => item.itemId == req.params.itemid);
-    res.status(200).json(foundItem);
+    res.status(statusCodes.OK).json(foundItem);
   } catch (err) {
-    res.status(400).json('Error to list item');
+    res.status(statusCodes.BAD_REQUEST).json({ message: 'Error to list item' });
   }
 }
 
 async function update(req, res) {
   try {
     const order = await orderService.update(req.params.id, req.body);
-    res.status(201).json(order);
+    res.status(statusCodes.CREATED).json(order);
   } catch (err) {
-    res.status(400).json('Error to update in database');
+    res
+      .status(statusCodes.BAD_REQUEST)
+      .json({ message: 'Error to update in database' });
   }
 }
 
 async function updateItem(req, res) {
   try {
     const order = await orderService.updateItem(req.params.id, req.body);
-    res.status(201).json(order);
+    res.status(statusCodes.CREATED).json(order);
   } catch (err) {
-    res.status(400).json('Error to update in database');
+    res
+      .status(statusCodes.BAD_REQUEST)
+      .json({ message: 'Error to update in database' });
   }
 }
 
 async function remove(req, res) {
   try {
     const order = await orderService.remove(req.params.id);
-    res.status(200).json(order);
+    res.status(statusCodes.OK).json(order);
   } catch (err) {
-    res.status(400).json('Error to remove in database');
+    res
+      .status(statusCodes.BAD_REQUEST)
+      .json({ message: 'Error to remove in database' });
   }
 }
 
