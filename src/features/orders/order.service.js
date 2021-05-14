@@ -1,37 +1,37 @@
 const repository = require('./order.repository');
 
 async function insert(body) {
-  return await repository.insert(body);
+  return repository.insert(body);
 }
 
 async function addItem(orderId, body) {
-  return await repository.addItem(orderId, body);
+  return repository.addItem(orderId, body);
 }
 
 async function list(params) {
   const conditions = params;
   const paging = {};
-  return await repository.find(conditions, paging);
+  return repository.find(conditions, paging);
 }
 
 async function listById(id) {
-  return await repository.find({ orderId: id });
+  return repository.find({ orderId: id });
 }
 
 async function listItem(orderId, itemId) {
-  return await repository.findItem(orderId, itemId);
+  return repository.findItem(orderId, itemId);
 }
 
 async function update(id, body) {
-  return await repository.update(id, body);
+  return repository.update(id, body);
 }
 
 async function updateItem(orderId, body) {
-  return await repository.updateItem(orderId, body);
+  return repository.updateItem(orderId, body);
 }
 
 async function remove(id) {
-  return await repository.remove({ orderId: id });
+  return repository.remove({ orderId: id });
 }
 
 module.exports = {
