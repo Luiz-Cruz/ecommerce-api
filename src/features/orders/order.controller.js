@@ -10,7 +10,6 @@ async function create(req, res) {
       .status(statusCodes.BAD_REQUEST)
       .json({ message: 'Error to saving in database' });
   }
-}
 
 async function addItem(req, res) {
   try {
@@ -50,7 +49,6 @@ async function listItem(req, res) {
   } catch (err) {
     res.status(statusCodes.BAD_REQUEST).json({ message: 'Error to list item' });
   }
-}
 
 async function update(req, res) {
   try {
@@ -83,7 +81,7 @@ async function remove(req, res) {
       .status(statusCodes.BAD_REQUEST)
       .json({ message: 'Error to remove in database' });
   }
-}
+
 
 module.exports = {
   create,

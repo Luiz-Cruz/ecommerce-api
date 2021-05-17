@@ -6,7 +6,6 @@ async function find(conditions, paging) {
 
 async function findItem(orderId, itemId) {
   return orderModel.findOne({ orderId: orderId, 'items.itemId': itemId });
-}
 
 async function addItem(orderId, body) {
   const order = await orderModel.findOne({ orderId: orderId });
