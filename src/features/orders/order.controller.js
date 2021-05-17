@@ -42,7 +42,7 @@ async function listById(req, res) {
 async function listItem(req, res) {
     try {
         const {id, itemId} = req.params;
-        const items = await orderService.listItem(id, itemId);
+        const {items} = await orderService.listItem(id, itemId);
         const foundItem = items.find(item => item.itemId == itemId);
         res.status(200).json(foundItem);
     } catch(err){
