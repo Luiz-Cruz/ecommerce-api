@@ -11,11 +11,11 @@ async function addItem(orderId, body) {
 async function list(params) {
   const conditions = params;
   const paging = {};
-  return repository.find(conditions, paging); 
+  return repository.find(conditions, paging);
 }
 
 async function listById(id) {
-   return repository.find({'orderId': id });
+  return repository.find({ orderId: id });
 }
 
 async function listItem(orderId, itemId) {
@@ -31,7 +31,16 @@ async function updateItem(orderId, body) {
 }
 
 async function remove(id) {
-  return repository.remove({'orderId': id});
+  return repository.remove({ orderId: id });
 }
 
-module.exports = { addItem, list, listById, listItem, insert, update, updateItem, remove };
+module.exports = {
+  addItem,
+  list,
+  listById,
+  listItem,
+  insert,
+  update,
+  updateItem,
+  remove,
+};

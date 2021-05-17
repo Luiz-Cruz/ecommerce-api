@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const orderController = require('./order.controller');
+const orderMiddleware = require('./order.middleware');
 
-router.post('/', orderController.create);
+router.post('/', orderMiddleware.checkShippingValue, orderController.create);
+router.post('/:id/item', orderController.addItem);
 router.delete('/:id', orderController.remove);
 router.put('/:id', orderController.update);
 router.get('/', orderController.list);

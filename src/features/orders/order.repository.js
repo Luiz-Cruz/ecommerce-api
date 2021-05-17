@@ -5,13 +5,12 @@ async function find(conditions, paging) {
 }
 
 async function findItem(orderId, itemId) {
-  return orderModel.findOne({'orderId': orderId, 'items.itemId': itemId}, {items:1}).exec();
-}
+  return orderModel.findOne({ orderId: orderId, 'items.itemId': itemId });
 
 async function addItem(orderId, body) {
-  const order =  await orderModel.findOne({'orderId': orderId});
+  const order = await orderModel.findOne({ orderId: orderId });
   order.items.push(body);
-  return orderModel.findOneAndUpdate({'orderId': orderId}, order);
+  return orderModel.findOneAndUpdate({ orderId: orderId }, order);
 }
 
 async function insert(body) {
@@ -19,15 +18,26 @@ async function insert(body) {
 }
 
 async function update(id, body) {
-  return orderModel.findOneAndUpdate({'orderId': id}, body);
+  return orderModel.findOneAndUpdate({ orderId: id }, body);
 }
 
 async function updateItem(orderId, body) {
-  return  orderModel.findOneAndUpdate({'orderId': orderId}, {$set:{items: body}});
+  return orderModel.findOneAndUpdate(
+    { orderId: orderId },
+    { $set: { items: body } }
+  );
 }
 
 async function remove(id) {
   return orderModel.deleteOne(id);
 }
 
-module.exports = { find, addItem, findItem, insert, update, updateItem, remove };
+module.exports = {
+  find,
+  addItem,
+  findItem,
+  insert,
+  update,
+  updateItem,
+  remove,
+};
